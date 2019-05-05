@@ -1,5 +1,5 @@
 const http = require('http');
-const hostname = "leia.cs.spu.edu";
+const hostname = 'localhost';
 const port = 3007;
 
 var friends2 = require("./friends2.json"); // Once for all times
@@ -37,17 +37,31 @@ const server = http.createServer((request, response) => {
         '                                       <th scope="col">First Name</th> \n' +
         '                                       <th scope="col">Last Name</th> \n' +
         '                                       <th scope="col">Phone</th> \n' +
+        '                                       <th scope="col">Gender</th> \n' +
         '                               </tr> \n' +
         '                       </thead> \n' +
         '                       <tbody> \n'
     );
-	for (var key in friends2)
-	        for (var f in friends2[key])
+
+          for (var j in friends2["boys"])
+            response.write(
+                  '                               <tr> \n' +
+                  '                                       <td>' + friends2["boys"][j]["firstName"] + '</td> \n' +
+                  '                                       <td>' + friends2["boys"][j]["lastName"] + '</td> \n' +
+                  '                                       <td>' + friends2["boys"][j]["phone"] + '</td> \n' +
+                  '                                       <td>Boy</td> \n' +
+
+                  '                               </tr> \n'
+              );
+
+
+            for (var f in friends2["girls"])
 	            response.write(
 	                '                               <tr> \n' +
-	                '                                       <td>' + friends[boys][key][f]["firstName"] + '</td> \n' +
-	                '                                       <td>' + friends[boys][key][f]["lastName"] + '</td> \n' +
-	                '                                       <td>' + friends[boys][key][f]["phone"] + '</td> \n' +
+	                '                                       <td>' + friends2["girls"][f]["firstName"] + '</td> \n' +
+	                '                                       <td>' + friends2["girls"][f]["lastName"] + '</td> \n' +
+	                '                                       <td>' + friends2["girls"][f]["phone"] + '</td> \n' +
+                  '                                       <td>Girl</td> \n' +
 
 	                '                               </tr> \n'
 	            );
@@ -60,36 +74,6 @@ const server = http.createServer((request, response) => {
 	        '       </body> \n' +
 	        '</html> \n'
 	    );
-      response.write(
-          '               <table class="table table-bordered table-hover"> \n' +
-          '                       <thead> \n' +
-          '                               <tr> \n' +
-          '                                       <th scope="col">First Name</th> \n' +
-          '                                       <th scope="col">Last Name</th> \n' +
-          '                                       <th scope="col">Phone</th> \n' +
-          '                               </tr> \n' +
-          '                       </thead> \n' +
-          '                       <tbody> \n'
-      );
-  	for (var key in friends2)
-  	        for (var f in friends2[key])
-  	            response.write(
-  	                '                               <tr> \n' +
-  	                '                                       <td>' + friends[girls][key][f]["firstName"] + '</td> \n' +
-  	                '                                       <td>' + friends[girls][key][f]["lastName"] + '</td> \n' +
-  	                '                                       <td>' + friends[girls][key][f]["phone"] + '</td> \n' +
-
-  	                '                               </tr> \n'
-  	            );
-
-  	    response.write(
-  	        '                       </tbody> \n' +
-  	        '               </table> \n'
-  	    );
-  	    response.write(
-  	        '       </body> \n' +
-  	        '</html> \n'
-  	    );
 	    response.end();
 
 });
